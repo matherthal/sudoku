@@ -95,8 +95,15 @@ def run(n, values):
     import datetime
     start = datetime.datetime.now()
     
+        # Remove spaces from begin and end of line
+    values = re.sub(r"([\s\t]+\n[\s\t]+)|[\s\t]+", r"\n", values)
+    
+    # Split values by space and new line into a list
     list_values = re.split(' |\n', values)
+    
+    # Create a board after a list of values with all possible values filled in empty possitions
     board = initialize(n, list_values)
+
     max_values = n**2
     last_count = 0
     
@@ -121,52 +128,10 @@ def run(n, values):
     end = datetime.datetime.now()
     elapsed = end - start
     
-    print('Elapsed time: {}milliseconds'.format(elapsed.microseconds / 1000))
+    print('Elapsed time: {} milliseconds'.format(elapsed.microseconds / 1000))
     
     draw(board)
 
     return board
 
-def test_easy():
-    easy = \
-    """9 _ _ 4 _ _ _ _ 1
-    _ 7 6 _ 2 _ _ _ _
-    2 _ 1 9 _ _ _ _ 3
-    _ _ _ _ _ 2 4 _ _
-    6 _ 9 3 _ _ 7 _ _
-    4 _ _ 7 _ 5 8 _ _
-    _ 9 _ 5 3 _ 6 8 _
-    3 5 7 _ 6 _ _ _ _
-    _ _ _ _ 1 _ _ 9 _"""
-    
-    run(9, easy)                                                                            
-
-#def test_hard():
-hard = """_ 4 _ 9 2 _ _ _ _
-_ 2 _ _ _ _ _ _ _
-_ _ _ _ _ _ _ 1 3
-_ _ _ 4 3 _ _ _ 2
-2 5 8 _ _ 6 _ _ _
-_ _ 4 1 _ _ _ _ 9
-_ _ _ _ _ _ 5 8 _
-8 _ 9 _ 7 3 _ _ _
-_ _ _ _ _ 1 _ 3 _"""
-   
-#run(9, hard)
-
-test_easy()
-
-#run(9, values)
-
-hard2 = \
-"""_ _ _ _ _ _ _ 4 8
-_ 9 8 2 _ _ _ _ 7
-_ _ _ 4 3 _ _ _ 6
-9 8 _ _ _ _ _ _ _
-_ _ _ 3 1 _ _ _ _
-7 _ _ _ _ _ _ 9 4
-_ _ 9 _ _ _ 6 _ _
-_ _ _ 7 _ 2 _ _ _
-5 _ 3 _ _ 4 8 _ _"""
-
-#run(9, hard2)
+run(9, values)
